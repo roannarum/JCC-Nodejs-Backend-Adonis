@@ -22,4 +22,20 @@ router.post('/register',(req, res) =>{
   }
 })
 
+router.get('/karyawan', async (req, res) => {
+  try {
+     let readJSON = await fspromises.readFile('data.json');
+     let currentData = JSON.parse(readJSON);
+     console.log(currentData);
+     return res.status(200).send({
+      message: "Berhasil get karyawan",
+       data: currentData
+     });
+    } catch (error) {
+     return res.status(400).json ({
+      message: "error",
+       error: error
+     });
+    }
+ })
 module.exports = router;
